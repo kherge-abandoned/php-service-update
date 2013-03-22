@@ -33,5 +33,18 @@ $container->register(new UpdateServiceProvider(), array(
     'update.url' => 'https://example.com/manifest.json'
 ));
 
-$container['update']('1.0.0'); // 1.0.0 is the current version
+/** @var $manager Herrera\Phar\Update\Manager */
+$manager = $container['update.manager'];
+
+/** @var $manifest Herrera\Phar\Update\Manifest */
+$manifest = $container['update.manifest'];
+
+/**
+ * Updates the running Phar.
+ *
+ * @param string  $version The current version.
+ * @param boolean $major   Lock to current major version?
+ * @param boolean $pre     Allow updates to pre-releases?
+ */
+$callable = $container['update'];
 ```
