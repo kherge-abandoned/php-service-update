@@ -21,7 +21,7 @@ class UpdateServiceProvider implements ProviderInterface
     {
         $container['update'] = $container->many(function (
             $version,
-            $major = false,
+            $major = true,
             $pre = false
         ) use (
             $container
