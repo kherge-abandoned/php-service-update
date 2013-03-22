@@ -43,7 +43,7 @@ class UpdateServiceProviderTest extends TestCase
 
         unset($phar);
 
-        $phar = new Phar('test-2.0.0.phar');
+        $phar = new Phar('test-2.0.0-alpha.1.phar');
         $phar->addFromString('go.php', '<?php echo 2;');
         $phar->setStub($phar->createDefaultStub('go.php'));
 
@@ -52,9 +52,9 @@ class UpdateServiceProviderTest extends TestCase
         file_put_contents('manifest.json', json_encode(array(
             array(
                 'name' => 'test.phar',
-                'sha1' => sha1_file($this->dir . '/test-2.0.0.phar'),
-                'url' => "file://{$this->dir}/test-2.0.0.phar",
-                'version' => '2.0.0'
+                'sha1' => sha1_file($this->dir . '/test-2.0.0-alpha.1.phar'),
+                'url' => "file://{$this->dir}/test-2.0.0-alpha.1.phar",
+                'version' => '2.0.0-alpha.1'
             )
         )));
 
@@ -65,7 +65,7 @@ class UpdateServiceProviderTest extends TestCase
 
         $_SERVER['argv'][0] = $this->dir . DIRECTORY_SEPARATOR . 'running.phar';
 
-        $container['update']('1.0.0');
+        $container['update']('1.0.0', false, true);
 
         $this->assertEquals('2', exec('php running.phar'));
     }
